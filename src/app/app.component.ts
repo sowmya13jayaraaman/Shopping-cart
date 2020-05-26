@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductserviceService } from './productservice.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'shoppingCart';
+
+total;
+
+
+  constructor(private prodserv:ProductserviceService) { }
+
+  ngOnInit() {
+
+  this.prodserv.getTotalItems()
+  .subscribe(value => {
+      this.total = value;
+  });
+}
+
 }

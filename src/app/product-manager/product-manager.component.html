@@ -1,0 +1,32 @@
+<div class="search-item">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="Search item">
+</div>
+
+
+<div class="container-fluid" style="display: flex;flex-wrap:wrap;justify-content: space-between;">
+    <div *ngFor='let product of products | searching:searchText'>
+        <div class="card " style="width: 400px;">
+            <img src="assets/images/{{product.img}}">
+            <div class="card-body cardcontent">
+                <h5 class="card-title">{{ product.id }}</h5>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price | currency }}</p>
+                <div style="display: flex;justify-content: space-between;">
+                    <button class='probut' (click)='addToCart(product)' [disabled]='hide[product.id]'>Add To Cart</button>
+
+                    <div *ngIf='hide[product.id]'>
+                        <button (click)="increase(product.id)">+</button>
+                        <input style='width:45px' type="number" readonly [(ngModel)]=" product.qty" />
+                        <button (click)="decrease(product.id)">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    | searching:searchText'
+ <h2>{{ products[0].name }}</h2>
+  <h3> {{ hide[products[0].name] }}</h3> -->

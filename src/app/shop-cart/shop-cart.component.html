@@ -1,0 +1,31 @@
+
+
+
+
+
+<section class="container content-section">
+    <h2 class="section-header">CART</h2>
+    <div class="cart-row">
+        <span class="cart-item cart-header cart-column">ITEM</span>
+        <span class="cart-price1 cart-header cart-column">PRICE</span>
+        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+    </div>
+    <div class="cart-items" *ngFor = 'let cart of cartItems'>
+        <div class="cart-row">
+            <div class="cart-item cart-column">
+                <img class="cart-item-image" src="assets/images/{{cart.img}}" width="100" height="100">
+                <span class="cart-item-title">{{ cart.name }}</span>
+            </div>
+            <span class="cart-price cart-column">{{ cart.price | currency }}</span>
+            <div class="cart-quantity cart-column">
+                <input #quantity readonly class="cart-quantity-input" type="number" value={{cart.qty}}>
+                <button class="btn btn-danger" type="button" (click)='remove(cart)'>REMOVE</button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">{{ totamt | currency}}</span>
+    </div>
+    <button *ngIf='cartItems.length!=0' class="btn btn-primary btn-purchase" type="button" (click) = "purchase()">PURCHASE</button>
+</section>
